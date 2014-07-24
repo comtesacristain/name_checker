@@ -26,8 +26,8 @@ end
 
 def check_company_name(name)
   puts "Looking for company with name \"#{name}\" ..."
-  company=Company.where("upper(company_name) like '%#{name.upcase}%'")
-  case company.size
+  companies=Company.where("upper(company_name) like '%#{name.upcase}%'")
+  case companies.size
   when 0
     if name.include?("JV")
       puts "Company #{name} is a joint venture"
@@ -43,6 +43,7 @@ def check_company_name(name)
       return
     end
   when 1
+    company=companies.pop
     puts "Found company: #{company.company_name}"
     return company
   else
