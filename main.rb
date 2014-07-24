@@ -45,7 +45,7 @@ def check_company_name(name)
     return 
   end
   puts "Looking for company with name \"#{name}\" ..."
-  companies=Company.where("upper(company_name) like '%#{name.upcase}%'")
+  companies=Company.check_name(name)
   case companies.size
   when 0
     companies = Array.new
@@ -83,13 +83,3 @@ end
 
 
 find_names
-
-
-#companies = Company.where("upper(company_name) like '%#{company_name.upcase}%'")
-    #if companies.size ==0
-      #company_name=company_name.split(/ /).first
-      #companies = Company.where("upper(company_name) like '%#{company_name.upcase}%'")
-    #end
-    #if companies.size ==1
-      #puts "#{deposit.id}, #{deposit.name}, #{companies.first.id}, #{companies.first.company_name}"
-    #end
