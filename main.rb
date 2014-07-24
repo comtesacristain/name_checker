@@ -1,4 +1,4 @@
-GENERIC_KEY_WORDS=["Iron","Hill","Lake","Mount"]
+GENERIC_KEYWORDS=["Iron","Hill","Lake","Mount"]
 require 'rubygems'
 gem 'activerecord'
 require 'yaml'
