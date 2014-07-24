@@ -1,4 +1,6 @@
-GENERIC_KEYWORDS=["Iron","Hill","Lake","Mount","and","Group","Creek","North","West","Corp","Ltd","Silver","Resources","Areas","South","Eastern"]
+GENERIC_KEYWORDS=["Iron","Hill","Lake","Mount","and","Group","Creek",
+  "North","West","Corp","Ltd","Silver","Resources","Areas","South","Eastern",
+  "Minerals"]
 ACRONYMS={"FMG"=>"Fortescue"}
 require 'rubygems'
 gem 'activerecord'
@@ -20,6 +22,7 @@ def find_names
     name = deposit.name
     name  =~ /.*\((.*)\)/
     company_name = $1
+    puts "Searching for companies associated with deposit '#{deposit.name}' (eno: #{deposit.eno})"
     unless company_name.blank?
       companies = check_company_name(company_name) 
     end
@@ -32,7 +35,7 @@ def find_names
 end
 
 def check_company_name(name)
-  ACRONYMS.keys.include?(name) ? name = ACRONYMS[name]
+  ACRONYMS.keys.include?(name) ? name = ACRONYMS[name] : 
   if name.length < 3
     puts "Name '#{name}' too short to query"
     return 
@@ -57,6 +60,7 @@ def check_company_name(name)
         companies << check_company_name(n)
       end
     else
+      puts "No companies found"
       return companies
     end
     return companies.compact #remove returned nils
