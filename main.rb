@@ -1,4 +1,4 @@
-GENERIC_KEYWORDS=["Iron","Hill","Lake","Mount"]
+GENERIC_KEYWORDS=["Iron","Hill","Lake","Mount","and","Group"]
 require 'rubygems'
 gem 'activerecord'
 require 'yaml'
@@ -22,11 +22,14 @@ def find_names
     unless company_name.blank?
       companies = check_company_name(company_name) 
     end
+    companies.each do |company|
+      associate_ownership(deposit, company)
+    end
   end
 end
 
 def check_company_name(name)
-  if name.length < 4
+  if name.length < 3
     puts "Name '#{name}' too short to query"
     return 
   end
@@ -38,6 +41,7 @@ def check_company_name(name)
   companies=Company.where("upper(company_name) like '%#{name.upcase}%'")
   case companies.size
   when 0
+    companies = Array.new
     if name.include?("JV")
       puts "Company #{name} is a joint venture"
       name = name.split(/JV/).map{|s| s.strip}
@@ -46,18 +50,17 @@ def check_company_name(name)
     end
     if name.size > 1
       name.each do |n|
-        check_company_name(n)
+        companies << check_company_name(n)
       end
     else
       return
     end
+    return companies.compact #remove returned nils
   when 1
-    company=companies.pop
-    puts "Found company: #{company.company_name}"
-    return company
+    return companies
   else
     puts "Company: #{name} returns two companies"
-    return
+    return companies
   end
   
 end
