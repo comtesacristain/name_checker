@@ -11,4 +11,7 @@ class Company < ActiveRecord::Base
     where("upper(company_name) like '%#{name.upcase}%'")
   end
  
+  def name
+    return company_name
+  end
 end
