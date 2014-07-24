@@ -70,7 +70,7 @@ def check_company_name(name)
   else
     puts "Company: #{name} returns two or more companies"
     companies.each_with_index do |company,i|
-      puts "(#{i}) #{company}"
+      puts "(#{i}) #{company.company_name}"
     end
     return companies
   end
