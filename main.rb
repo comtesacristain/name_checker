@@ -1,6 +1,6 @@
 GENERIC_KEYWORDS=["Iron","Hill","Lake","Mount","and","Group","Creek",
   "North","West","Corp","Ltd","Silver","Resources","Areas","South","Eastern",
-  "Minerals"]
+  "Minerals","Metal","Resource"]
 ACRONYMS={"FMG"=>"Fortescue"}
 require 'rubygems'
 gem 'activerecord'
