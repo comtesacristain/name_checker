@@ -32,7 +32,7 @@ def find_names
 end
 
 def check_company_name(name)
-  if ACRONYMS.keys.include?(name) name = ACRONYMS[name]
+  if ACRONYMS.keys.include?(name) then name = ACRONYMS[name]
   if name.length < 3
     puts "Name '#{name}' too short to query"
     return 
