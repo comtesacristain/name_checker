@@ -9,4 +9,14 @@ class Website < ActiveRecord::Base
 
   set_date_columns :entrydate, :qadate, :lastupdate
 
+  def self.by_description(name)
+    where("upper(description) like '%#{name.upcase}%'")
+  end
+  
+  def self.to_delete
+    where(:remark=>'DELETE')
+  end
+  
+  
+
 end
