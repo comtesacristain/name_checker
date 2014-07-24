@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 GENERIC_KEYWORDS=["Iron","Hill","Lake","Mount","and","Group","Creek",
   "North","West","Corp","Ltd","Silver","Resources","Areas","South","Eastern",
-  "Minerals","Metal","Resource"]
+  "Minerals"]
 ACRONYMS={"FMG"=>"Fortescue"}
 require 'rubygems'
 gem 'activerecord'
@@ -52,12 +51,12 @@ def check_company_name(name)
     companies = Array.new
     if name.include?("JV")
       puts "Company #{name} is a joint venture"
-      names = name.split(/JV/).map{|s| s.strip}
+      name = name.split(/JV/).map{|s| s.strip}
     else
-      names = name.split(/ /) 
+      name = name.split(/ /) 
     end
-    if names.size > 1
-      names.each do |n|
+    if name.size > 1
+      name.each do |n|
         companies << check_company_name(n)
       end
     else
@@ -87,9 +86,3 @@ end
 
 
 find_names
-=======
-# This is a clean up script for Websites.
-# Will eventually evolve into a more comprehensive cleanup package
-
-
->>>>>>> b9c3c8f9ba79e50294896da392fabb1764b078ec
