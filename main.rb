@@ -22,9 +22,11 @@ def find_names
     unless company_name.blank?
       companies = check_company_name(company_name) 
     end
+    unless companies.nil?
     companies.each do |company|
       associate_ownership(deposit, company)
     end
+  end
   end
 end
 
@@ -53,7 +55,7 @@ def check_company_name(name)
         companies << check_company_name(n)
       end
     else
-      return
+      return companies
     end
     return companies.compact #remove returned nils
   when 1
