@@ -1,5 +1,3 @@
-
-
 require 'rubygems'
 gem 'activerecord'
 require 'yaml'
@@ -25,7 +23,7 @@ def find_names
 	  case companies.size
 	  when 0
 	    puts "No companies found with #{company_name} (deposit: #{deposit.name})"
-  	    puts "Split? (Y/N)"
+  	  puts "Split? (Y/N)"
 	    answer = gets.chomp
 	    if answer.upcase == 'Y'
 	      check_split_company_name(company_name)
@@ -40,8 +38,29 @@ end
 
 def check_company_name(name)
   puts "Looking for company with name \"#{name}\" ..."
-  return Company.where("upper(company_name) like '%#{name.upcase}%'")
- 
+  company=Company.where("upper(company_name) like '%#{name.upcase}%'")
+  case company.size
+  when 0
+    if name.include?("JV")
+      puts "Company #{name} is a joint venture"
+      name = name.split(/JV/).map{|s| s.strip}
+    else
+      name = name.split(/ /) 
+    end
+    if name.size > 1
+      name.each do |n|
+        check_company_name(n)
+      end
+    else
+      return
+    end
+  when 1
+    return company
+  else
+    puts "Company: #{name} returns two companies"
+    return
+  end
+  
 end
 
 def check_split_company_name(name)
