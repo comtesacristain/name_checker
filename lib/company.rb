@@ -7,6 +7,8 @@ class Company < ActiveRecord::Base
   set_date_columns :entrydate, :qadate, :lastupdate 
 
   
-
+  def check_name(name)
+    where("upper(company_name) like '%#{name.upcase}%'")
+  end
  
 end
