@@ -43,7 +43,7 @@ def check_company_name(name)
       return
     end
   when 1
-    puts "Found company: #{company.company.name}"
+    puts "Found company: #{company.company_name}"
     return company
   else
     puts "Company: #{name} returns two companies"
