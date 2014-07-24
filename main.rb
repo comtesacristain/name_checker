@@ -37,20 +37,20 @@ end
 def check_company_name(name)
   ACRONYMS.keys.include?(name) ? name = ACRONYMS[name] : 
   if name.length < 3
-    puts "\tName '#{name}' too short to query"
+    puts "Name '#{name}' too short to query"
     return 
   end
   if GENERIC_KEYWORDS.include?(name)
-    puts "\tName '#{name}' too generic to query"
+    puts "Name '#{name}' too generic to query"
     return 
   end
-  puts "\tLooking for company with name \"#{name}\" ..."
+  puts "Looking for company with name \"#{name}\" ..."
   companies=Company.where("upper(company_name) like '%#{name.upcase}%'")
   case companies.size
   when 0
     companies = Array.new
     if name.include?("JV")
-      puts "\t\tCompany #{name} is a joint venture"
+      puts "Company #{name} is a joint venture"
       name = name.split(/JV/).map{|s| s.strip}
     else
       name = name.split(/ /) 
@@ -60,15 +60,15 @@ def check_company_name(name)
         companies << check_company_name(n)
       end
     else
-      puts "\t\tNo companies found"
+      puts "No companies found"
       return companies
     end
     return companies.compact #remove returned nils
   when 1
-    puts "\t\tFound #{companies.first.company_name} for #{name}"
+    puts "Found #{companies.first.company_name} for #{name}"
     return companies
   else
-    puts "\t\tCompany: #{name} returns two companies"
+    puts "Company: #{name} returns two companies"
     return companies
   end
   
