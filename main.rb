@@ -21,9 +21,9 @@ def find_names
   deposits.each do |deposit|
     name = deposit.name
     name  =~ /.*\((.*)\)/
-    company_name = $1
-    puts "Searching for companies associated with deposit '#{deposit.name}' (eno: #{deposit.eno})"
+    company_name = $1  
     unless company_name.blank?
+      puts "Searching for companies associated with deposit '#{deposit.name}' (eno: #{deposit.eno})"
       companies = check_company_name(company_name) 
     end
     unless companies.nil?
