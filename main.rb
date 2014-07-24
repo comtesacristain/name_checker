@@ -59,6 +59,7 @@ def check_company_name(name)
     end
     return companies.compact #remove returned nils
   when 1
+    puts "Found #{companies.first.company_name} for #{name}"
     return companies
   else
     puts "Company: #{name} returns two companies"
