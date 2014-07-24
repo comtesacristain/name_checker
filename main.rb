@@ -45,7 +45,7 @@ def check_company_name(name)
     return 
   end
   puts "Looking for company with name \"#{name}\" ..."
-  companies=Company.check_name(name)
+  companies=Company.by_name(name)
   case companies.size
   when 0
     companies = Array.new
