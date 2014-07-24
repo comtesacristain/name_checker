@@ -25,6 +25,10 @@ def find_names
 end
 
 def check_company_name(name)
+  if name.length < 4
+    puts "Name '#{name}' too short to query"
+    return 
+  end 
   puts "Looking for company with name \"#{name}\" ..."
   companies=Company.where("upper(company_name) like '%#{name.upcase}%'")
   case companies.size
