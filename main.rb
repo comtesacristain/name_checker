@@ -20,18 +20,6 @@ def find_names
     company_name = $1
     unless company_name.blank?
       companies = check_company_name(company_name) 
-	  case companies.size
-	  when 0
-	    puts "No companies found with #{company_name} (deposit: #{deposit.name})"
-  	  puts "Split? (Y/N)"
-	    answer = gets.chomp
-	    if answer.upcase == 'Y'
-	      check_split_company_name(company_name)
-	    end
-	  when 1
-	    puts "Company found (company: #{company.company_name})"
-	  else
-	  end
     end
   end
 end
@@ -55,6 +43,7 @@ def check_company_name(name)
       return
     end
   when 1
+    puts "Found company: #{company.company.name}"
     return company
   else
     puts "Company: #{name} returns two companies"
@@ -63,17 +52,7 @@ def check_company_name(name)
   
 end
 
-def check_split_company_name(name)
-  names = name.split(/ /)
-  puts "Which name do you choose?"
-  names.each_with_index do |n,i|
-	puts "\t(#{i+1}) #{n}"
-  end
-  answer = gets.chomp
-  name=names[answer.to_i-1] unless answer.to_i>names.size 
-  return check_company_name(name)
-  
-end
+
 
 def associate_ownership(deposit, company)
   
