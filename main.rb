@@ -8,7 +8,7 @@ require 'yaml'
 require 'active_record'
 require 'csv'
 
-#require File.join('.', 'intierra_reader.rb')
+
 require File.join('.', 'connection.rb')
 require File.join('./lib', 'entity.rb')
 require File.join('./lib', 'deposit.rb')
@@ -20,7 +20,7 @@ def find_names
 
   deposits.each do |deposit|
     name = deposit.name
-    name  =~ /.*\((.*)\)/
+    name  =~ /.*\((.*)\)/ #Find text between parentheses
     company_name = $1  
     unless company_name.blank?
       puts "Searching for companies associated with deposit '#{deposit.name}' (eno: #{deposit.eno})"
@@ -63,12 +63,15 @@ def check_company_name(name)
       puts "No companies found"
       return companies
     end
-    return companies.compact #remove returned nils
+    return companies.compact # compact removes nils returned from recursive searches
   when 1
     puts "Found #{companies.first.company_name} for #{name}"
     return companies
   else
-    puts "Company: #{name} returns two companies"
+    puts "Company: #{name} returns two or more companies"
+    companies.each_with_index do |company,i|
+      puts "(#{i}) #{company}"
+    end
     return companies
   end
   
