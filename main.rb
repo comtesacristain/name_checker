@@ -35,7 +35,7 @@ def check_company_name(name)
     puts "Name '#{name}' too short to query"
     return 
   end
-  if GENERIC_KEYWORDS.contains?(name)
+  if GENERIC_KEYWORDS.include?(name)
     puts "Name '#{name}' too generic to query"
     return 
   end
