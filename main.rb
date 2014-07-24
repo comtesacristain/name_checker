@@ -51,12 +51,12 @@ def check_company_name(name)
     companies = Array.new
     if name.include?("JV")
       puts "Company #{name} is a joint venture"
-      name = name.split(/JV/).map{|s| s.strip}
+      names = name.split(/JV/).map{|s| s.strip}
     else
-      name = name.split(/ /) 
+      names = name.split(/ /) 
     end
-    if name.size > 1
-      name.each do |n|
+    if names.size > 1
+      names.each do |n|
         companies << check_company_name(n)
       end
     else
