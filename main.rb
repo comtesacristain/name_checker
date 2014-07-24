@@ -1,4 +1,5 @@
-GENERIC_KEYWORDS=["Iron","Hill","Lake","Mount","and","Group","Creek","North","West"]
+GENERIC_KEYWORDS=["Iron","Hill","Lake","Mount","and","Group","Creek","North","West","Corp","Ltd","Silver","Resources","Areas","South","Eastern"]
+ACRONYMS={"FMG"=>"Fortescue"}
 require 'rubygems'
 gem 'activerecord'
 require 'yaml'
@@ -31,6 +32,7 @@ def find_names
 end
 
 def check_company_name(name)
+  if ACRONYMS.keys.include?(name) name = ACRONYMS[name]
   if name.length < 3
     puts "Name '#{name}' too short to query"
     return 
